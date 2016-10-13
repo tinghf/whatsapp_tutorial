@@ -1,12 +1,19 @@
 import Moment from 'moment';
 import { Controller } from 'angular-ecmascript/module-helpers';
+import { Chats } from '../../../lib/collections';
 
 export default class ChatsCtrl extends Controller {
     constructor() {
         super(...arguments);
 
+        this.helpers({
+            data() {
+                return Chats.find();
+            }
+        });
+
         // mock data for testing UI
-        this.data = [
+/*        this.data = [
             {
                 _id: 0,
                 name: 'Ethan Gonzalez',
@@ -52,7 +59,7 @@ export default class ChatsCtrl extends Controller {
                     timestamp: Moment().subtract(2, 'weeks').toDate()
                 }
             }
-        ];
+        ];*/
 
         // Test 0/1 conversations
 /*
@@ -69,5 +76,10 @@ export default class ChatsCtrl extends Controller {
             }
         ];
 */
+    }
+
+    remove(chat) {
+        // this.data.splice(this.data.index(chat), 1);   // for mock test data
+        this.data.remove(chat);
     }
 }
